@@ -30,14 +30,12 @@ documents = coll.find({'first': 'douglas'})
 documents = coll.remove({'first': 'douglas'})
 
 # Updating One Entries:
-coll.update_one({'nationality': 'american'}, {'$set': 
-{'hair_colour': 'maroon'}}) 
+coll.update_one({'nationality': 'american'}, {'$set': {'hair_colour': 'maroon'}}) 
 
 documents = coll.find({'nationality': 'american'})
 
 # Updating Many Entries:
-coll.update_many({'nationality': 'american'}, {'$set': 
-{'hair_colour': 'maroon'}}) 
+coll.update_many({'nationality': 'american'}, {'$set': {'hair_colour': 'maroon'}}) 
 
 documents = coll.find({'nationality': 'american'})
 
