@@ -5,6 +5,7 @@ MONGODB_URI = os.getenv("MONGO_URI")
 DBS_NAME = "mytestdb"
 COLLECTION_NAME = "myFirstMDB"
 
+
 def mongo_connect(url):
     try:
         conn = pymongo.MongoClient(url)
@@ -12,12 +13,34 @@ def mongo_connect(url):
         return conn
     except pymongo.errors.ConnectionFailure as e:
         print("Could not connect to MongoDB: %s") % e
-        
+
+
 conn = mongo_connect(MONGODB_URI)
 
 coll = conn[DBS_NAME][COLLECTION_NAME]
 
+
+# show alll information in the database
 documents = coll.find()
+
+# Searching an specific data:
+documents = coll.find({'first': 'douglas'})
+
+# Removing Registries:
+documents = coll.remove({'first': 'douglas'})
+
+# Updating One Entries:
+coll.update_one({'nationality': 'american'}, {'$set': 
+{'hair_colour': 'maroon'}}) 
+
+documents = coll.find({'nationality': 'american'})
+
+# Updating Many Entries:
+coll.update_many({'nationality': 'american'}, {'$set': 
+{'hair_colour': 'maroon'}}) 
+
+documents = coll.find({'nationality': 'american'})
+
 
 for doc in documents:
     print(doc)
